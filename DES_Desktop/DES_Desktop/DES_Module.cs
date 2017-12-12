@@ -333,6 +333,20 @@ namespace DES_Module
             return buffer;
         }
 
+      /**
+        * @brief  Bu fonksiyon 64 bitlik bir blok veriyi sifreler
+        * @param  plainData
+        * @retval encodedData
+        */
+        UInt64 Encode_BlockData(UInt64 plainData)
+        {
+            UInt64 encodedData = 0x0000000000000000;
+
+
+            return encodedData;
+        }
+
+
     }
 
 }
