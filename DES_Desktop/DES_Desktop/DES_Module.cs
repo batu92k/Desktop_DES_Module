@@ -276,7 +276,12 @@ namespace DES_Module
 
                 permutedKey = (permutedKey | bitShift_Buffer);																		
             }
-																	
+
+            /* bit kaydirma islemi icin baslangic degerleri olan, alt anahtarlarin 0 numarali 
+             * sol ve sag parcalarinin elde edilmesi */
+            Cn[0] = (UInt32)((0xFFFFFFF000000000 & permutedKey) >> 32);
+            Dn[0] = (UInt32)((0x0000000FFFFFFF00 & permutedKey) >> 4);	
+																
 
         }
 
