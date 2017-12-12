@@ -221,6 +221,26 @@ namespace DES_Module
             return KEY;
         }
 
+        /**
+          * @brief  DES (Data Encryption Standart) IV (initialization vector) degiskeni bu fonksiyon ile belirlenir
+          * @param  value
+          * @retval none
+          */
+        public void Set_IV(UInt64 value)
+        {
+            IV = value;
+        }
+
+        /**
+          * @brief  Bu fonkaiyon; DES (Data Encryption Standart) IV (initialization vector) degiskenini geri dondurur
+          * @param  none
+          * @retval IV
+          */
+        public UInt64 Get_IV()
+        {
+            return IV;
+        }
+
     }
 
 }
