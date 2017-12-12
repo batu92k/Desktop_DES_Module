@@ -201,7 +201,25 @@ namespace DES_Module
 
         }
 
+        /**
+          * @brief  DES (Data Encryption Standart) anahtar degiskeni bu fonksiyon ile belirlenir
+          * @param  value
+          * @retval none
+          */
+        public void Set_Key(UInt64 value)
+        {
+            KEY = value;
+        }
 
+        /**
+          * @brief  Bu fonkaiyon; DES (Data Encryption Standart) anahtar degiskenini geri dondurur
+          * @param  none
+          * @retval KEY
+          */
+        public UInt64 Get_Key()
+        {
+            return KEY;
+        }
 
     }
 
