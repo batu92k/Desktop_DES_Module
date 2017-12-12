@@ -241,6 +241,24 @@ namespace DES_Module
             return IV;
         }
 
+        /**
+          * @brief  Bu fonksiyon; parametre olarak verilen DES anahtarini kullanarak DES sifreleme ve sifre cozme
+          *         isleminde kullanilacak alt anahtarlari uretir ve Sub_Keys global dizisine yerlestirir 
+          * @param  key
+          * @retval none
+          */
+        {
+            UInt64 permutedKey = 0x0000000000000000;        // orjinal DES anahtarinin PC_1 permutasyonu K+
+            UInt64 bitShift_Buffer = 0x0000000000000000;    // bit kaydirma degiskeni
+            UInt64 cnBuffer = 0x0000000000000000;           // permute edilmis anahtarin (K+) sol kismi
+            UInt64 dnBuffer = 0x0000000000000000;           // permute edilmis anahtarin (K+) sag kismi
+            UInt64 preSubKey = 0x0000000000000000;          // permute edilmemis alt anahtar tutucusu
+            byte i = 0;                                     // genel maksat sayac
+            byte j = 0;                                     // genel maksat sayac
+
+
+        }
+
     }
 
 }
