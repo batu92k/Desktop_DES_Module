@@ -317,6 +317,22 @@ namespace DES_Module
 
         }
 
+        /**
+          * @brief  Bu fonksiyon; DES hesaplama rutini sirasinda kullanilan 
+          *         dairesel sola kaydirma islemini gerceklestirir
+          * @param  value
+          * @param  shiftValue
+          * @retval buffer
+          */
+        UInt32 DES_Subkey_BitShifter(UInt32 value, byte shiftValue)
+        {
+            UInt32 buffer = 0x00000000;
+
+            buffer = (value << shiftValue) | ((value >> (32 - shiftValue)) << 4);
+
+            return buffer;
+        }
+
     }
 
 }
