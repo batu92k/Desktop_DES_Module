@@ -247,6 +247,7 @@ namespace DES_Module
           * @param  key
           * @retval none
           */
+        public void Get_Subkeys(UInt64 key = 0x0000000000000000)
         {
             UInt64 permutedKey = 0x0000000000000000;        // orjinal DES anahtarinin PC_1 permutasyonu K+
             UInt64 bitShift_Buffer = 0x0000000000000000;    // bit kaydirma degiskeni
@@ -256,6 +257,26 @@ namespace DES_Module
             byte i = 0;                                     // genel maksat sayac
             byte j = 0;                                     // genel maksat sayac
 
+            /* alt anahtar dizisini temizle */
+            for(i = 0; i < 16; i++)
+            {
+                Sub_Keys[i] = 0x0000000000000000;
+            }
+
+            /* DES anahtari K'nin PC_1 matrisi ile permute edilerek K+ permute edilmis anahtarin bulunmasi */
+            for (i = 0; i < 56; i++)
+            {
+                /* PC_1 matrisinin anahtar uzerinde adresledigi bit degeri bulunarak sira ile permute 
+                 * edilmis anahtar degiskenine ekleniyor */
+                bitShift_Buffer = 0x8000000000000000;
+                bitShift_Buffer = (bitShift_Buffer >> (PC_1[i] - 1));
+                bitShift_Buffer = bitShift_Buffer & (key);
+                bitShift_Buffer = (bitShift_Buffer << (PC_1[i] - 1));
+                bitShift_Buffer = (bitShift_Buffer >> i);
+
+                permutedKey = (permutedKey | bitShift_Buffer);																		
+            }
+																	
 
         }
 
