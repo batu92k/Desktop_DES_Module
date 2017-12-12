@@ -160,6 +160,11 @@ namespace DES_Module
 							  19,  13,  30,   6,
 							  22,  11,   4,  25  };
 
+        // DES sifreleme modlarini tanimlamak uzere enum degiskeni 
+        public enum DES_Mode { Default, ECB, CBC };
+
+
+
         /**
           * @brief  DES (Data Encryption Standart) sinif constructor fonksiyonu
           * @param  none
