@@ -1,4 +1,14 @@
-﻿using System;
+﻿/**
+  ******************************************************************************
+  * @file    Form1.cs
+  * @author  Ali Batuhan KINDAN
+  * @version V0.1
+  * @date    12 Aralik 2017
+  * @brief   Program ana form dosyasi
+  ******************************************************************************
+  */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
