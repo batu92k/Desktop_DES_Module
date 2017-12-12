@@ -280,7 +280,39 @@ namespace DES_Module
             /* bit kaydirma islemi icin baslangic degerleri olan, alt anahtarlarin 0 numarali 
              * sol ve sag parcalarinin elde edilmesi */
             Cn[0] = (UInt32)((0xFFFFFFF000000000 & permutedKey) >> 32);
-            Dn[0] = (UInt32)((0x0000000FFFFFFF00 & permutedKey) >> 4);	
+            Dn[0] = (UInt32)((0x0000000FFFFFFF00 & permutedKey) >> 4);
+
+            /* permutasyon oncesi alt anahtar parcalarinin hesaplanmasi */
+            for (i = 0; i < 16; i++)
+            {
+                /* her bir alt anahtar parcasi bir onceki parcanin bit kaydirma tablosuna gore
+                   dairesel bit kaydirmasiyla hesaplaniyor */
+                Cn[i + 1] = DES_Subkey_BitShifter(Cn[i], Shift_Table[i]);
+                Dn[i + 1] = DES_Subkey_BitShifter(Dn[i], Shift_Table[i]);
+            }
+
+            /* 16 adet alt anahtar hesaplaniyor */
+            for(i = 0; i < 16; i++)
+            {
+                cnBuffer = Cn[i + 1];
+                cnBuffer = (cnBuffer << 32);
+                dnBuffer = Dn[i + 1];
+                dnBuffer = (dnBuffer << 4);
+                preSubKey = (cnBuffer | dnBuffer);
+
+                /* ilgili alt anahtar PC_2 matrisi ile permute edilerek son halini aliyor */
+                for(j = 0; j < 48; j++)
+                {
+                    bitShift_Buffer = 0x8000000000000000;
+                    bitShift_Buffer = (bitShift_Buffer >> (PC_2[j] - 1));
+                    bitShift_Buffer = bitShift_Buffer & (preSubKey);
+                    bitShift_Buffer = (bitShift_Buffer << (PC_2[j] - 1));
+                    bitShift_Buffer = (bitShift_Buffer >> j);
+
+                    Sub_Keys[i] = (Sub_Keys[i] | bitShift_Buffer);
+                }
+
+            }
 																
 
         }
