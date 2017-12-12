@@ -67,13 +67,13 @@ namespace DES_Module
 
 
         // DES - Calculated Keys 0-15 (Kn)
-        UInt64[] Sub_Keys;
+        private UInt64[] Sub_Keys;
 
         // 28 bits left part of subkeys
-        UInt32[] Cn;
+        private UInt32[] Cn;
 
         // 28 bits right part of subkeys
-        UInt32[] Dn;
+        private UInt32[] Dn;
 
         // DES - Bit Shift Table
         private byte[] Shift_Table = { 1, 1, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 1 };
