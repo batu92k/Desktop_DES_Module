@@ -252,19 +252,27 @@ namespace DES_Module
             switch(cipherMode)
             {
 
+                    /* DES - CBC (Cipher Block Chaining) sifreleme rutini */
                 case DES_Mode_Enum.CBC:
                         
                     break;
 
+                    /* DES - ECB (Electronic Code Book) sifreleme rutini */
                 case DES_Mode_Enum.ECB:
+     
+                    Get_Subkeys();
+
+                    /* acik veri tek tek sifrelenerek sifrelenmis veri dizisine aktariliyor */
+                    for (i = 0; i < plainData.Length; i++)
+                    {
+                        cipherData[i] = Encode_BlockData(plainData[i]);
+                    }
 
                     break;
 
                 default:
                         // bu satir bilerek bos birakildi
                     break;
-
-
             }
 
             return cipherData;
