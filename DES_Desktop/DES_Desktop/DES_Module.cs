@@ -471,6 +471,53 @@ namespace DES_Module
             byte i = 0;                                         // genel maksat sayac
 
 
+            /* IP (Initial Permutation) matrisi ile mesaj (M) verisinin ilk permutasyon islemi yapililarak
+             * permute edilmis mesaj (M+) elde ediliyor */
+            for (i = 0; i < 64; i++)
+            {
+                bitShift_Buffer = 0x8000000000000000;
+                bitShift_Buffer = (bitShift_Buffer >> (IP[i] - 1));
+                bitShift_Buffer = bitShift_Buffer & (cipherData);
+                bitShift_Buffer = (bitShift_Buffer << (IP[i] - 1));
+                bitShift_Buffer = (bitShift_Buffer >> i);
+
+                decodedData = (decodedData | bitShift_Buffer);
+            }
+
+
+            /* permute edilmis mesajin 32 bitlik sag ve sol parcalara ayrilmasi */
+            ln_Old = (UInt32)((0xFFFFFFFF00000000 & decodedData) >> 32);
+            rn_Old = (UInt32)(0x00000000FFFFFFFF & decodedData);
+
+            /* permute edilmis ve parcalara ayrilmis mesaj verisinin 16 kez F fonksiyonu yardimi ile
+             * yer degistirerek sifreleme rutininin aynisi olan sifre cozme iterasyonunun yapilmasi */
+            for (i = 0; i < 16; i++)
+            {
+                ln = rn_Old;
+                rn = ln_Old ^ F_Function(rn_Old, (byte)(15 - i));
+
+                rn_Old = rn;
+                ln_Old = ln;
+            }
+
+            /* R16 ve L16 parcalari birlestirilerek permutasyon oncesi data elde ediliyor */
+            pre_PermutedData = rn_Old;
+            pre_PermutedData = (pre_PermutedData << 32);
+            pre_PermutedData = (pre_PermutedData | ln_Old);
+
+            /* IP^-1 matrisi ile sifresi cozulecek dataya son permutasyon islemi de uygulaniyor */
+            for (i = 0; i < 64; i++)
+            {
+                bitShift_Buffer = 0x8000000000000000;
+                bitShift_Buffer = (bitShift_Buffer >> (IP_[i] - 1));
+                bitShift_Buffer = bitShift_Buffer & (pre_PermutedData);
+                bitShift_Buffer = (bitShift_Buffer << (IP_[i] - 1));
+                bitShift_Buffer = (bitShift_Buffer >> i);
+
+                permutedData = (permutedData | bitShift_Buffer);
+            }
+
+            decodedData = permutedData;
 
             return decodedData;
         }
