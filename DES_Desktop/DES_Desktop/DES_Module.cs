@@ -350,6 +350,18 @@ namespace DES_Module
             UInt64 rn_Old = 0x00000000;
             byte i = 0;
 
+            /* IP (Initial Permutation) matrisi ile mesaj verisinin ilk permutasyon islemi yapiliyor */
+            for (i = 0; i < 64; i++)
+            {
+                bitShift_Buffer = 0x8000000000000000;
+                bitShift_Buffer = (bitShift_Buffer >> (IP[i] - 1));
+                bitShift_Buffer = bitShift_Buffer & (plainData);
+                bitShift_Buffer = (bitShift_Buffer << (IP[i] - 1));
+                bitShift_Buffer = (bitShift_Buffer >> i);
+
+                encodedData = (encodedData | bitShift_Buffer);
+            }
+
 
 
             return encodedData;
