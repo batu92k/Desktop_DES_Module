@@ -273,10 +273,10 @@ namespace DES_Module
         /**
           * @brief  Bu fonksiyon; parametre olarak verilen DES anahtarini kullanarak DES sifreleme ve sifre cozme
           *         isleminde kullanilacak alt anahtarlari uretir ve Sub_Keys global dizisine yerlestirir 
-          * @param  key
+          * @param  none
           * @retval none
           */
-        public void Get_Subkeys(UInt64 key = 0x0000000000000000)
+        public void Get_Subkeys()
         {
             UInt64 permutedKey = 0x0000000000000000;        // orjinal DES anahtarinin PC_1 permutasyonu K+
             UInt64 bitShift_Buffer = 0x0000000000000000;    // bit kaydirma degiskeni
@@ -299,7 +299,7 @@ namespace DES_Module
                  * edilmis anahtar degiskenine ekleniyor */
                 bitShift_Buffer = 0x8000000000000000;
                 bitShift_Buffer = (bitShift_Buffer >> (PC_1[i] - 1));
-                bitShift_Buffer = bitShift_Buffer & (key);
+                bitShift_Buffer = bitShift_Buffer & (KEY);
                 bitShift_Buffer = (bitShift_Buffer << (PC_1[i] - 1));
                 bitShift_Buffer = (bitShift_Buffer >> i);
 
