@@ -344,10 +344,10 @@ namespace DES_Module
             UInt64 bitShift_Buffer = 0x0000000000000000;
             UInt64 permutedData = 0x0000000000000000;
             UInt64 pre_PermutedData = 0x0000000000000000;
-            UInt64 ln = 0x00000000;
-            UInt64 ln_Old = 0x00000000;
-            UInt64 rn = 0x00000000;
-            UInt64 rn_Old = 0x00000000;
+            UInt32 ln = 0x00000000;
+            UInt32 ln_Old = 0x00000000;
+            UInt32 rn = 0x00000000;
+            UInt32 rn_Old = 0x00000000;
             byte i = 0;
 
             /* IP (Initial Permutation) matrisi ile mesaj (M) verisinin ilk permutasyon islemi yapililarak
@@ -364,19 +364,26 @@ namespace DES_Module
             }
 
             /* permute edilmis mesajin 32 bitlik sag ve sol parcalara ayrilmasi */
-            ln_Old = (0xFFFFFFFF00000000 & encodedData) >> 32;												
-            rn_Old = (0x00000000FFFFFFFF & encodedData);
+            ln_Old = (UInt32)(0xFFFFFFFF00000000 & encodedData) >> 32;												
+            rn_Old = (UInt32)(0x00000000FFFFFFFF & encodedData);
 
             /* permute edilmis ve parcalara ayrilmis mesaj verisinin 16 kez F fonksiyonu yardimi ile
              * yer degistirerek sifreleme rutini iterasyonunun yapilmasi */
             for (i = 0; i < 16; i++)
             {
                 ln = rn_Old;
-                //rn = ln_Old ^ F_Function
+                rn = ln_Old ^ F_Function(rn_Old, i);
 
                 rn_Old = rn;
                 ln_Old = ln;
             }
+
+            /* R16 ve L16 parcalari birlestirilerek permutasyon oncesi sifrelenmis data elde ediliyor */
+            pre_PermutedData = rn_Old;
+            pre_PermutedData = (pre_PermutedData << 32);
+            pre_PermutedData = (pre_PermutedData | ln_Old);	
+
+
 
             return encodedData;
         }
