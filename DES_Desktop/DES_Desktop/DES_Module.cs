@@ -243,7 +243,7 @@ namespace DES_Module
           * @param  plainData
           * @retval none
           */
-        public UInt64[] EncryptData(UInt64[] plainData, DES_Mode_Enum cipherMode)
+        public UInt64[] Encrypt_Data(UInt64[] plainData, DES_Mode_Enum cipherMode)
         {
             UInt64[] cipherData = new UInt64[plainData.Length];
             UInt64 chainBuffer = 0x0000000000000000;
@@ -254,7 +254,22 @@ namespace DES_Module
 
                     /* DES - CBC (Cipher Block Chaining) sifreleme rutini */
                 case DES_Mode_Enum.CBC:
-                        
+
+			        Get_Subkeys();
+
+                    /* acik verinin ilk elemani IV (Initialization Vector) ile XOR'landiktan sonra sifreleniyor */
+			        chainBuffer = (IV ^ plainData[0]);
+			        cipherData[0] = Encode_BlockData(chainBuffer);
+
+                    /* IV ile ilk veri elemaninin sifrelenmesinin ardindan her bir sifrelenmis veri bir sonraki
+                     * verinin sifrelenmesinde rol oynuyor. Boylece sifre blok zinciri olusturulmus oluyor */
+                    for (i = 1; i < plainData.Length; i++)
+			        {
+				        chainBuffer = (cipherData[i-1] ^ plainData[i]);
+
+				        cipherData[i] = Encode_BlockData(chainBuffer);
+			        }
+
                     break;
 
                     /* DES - ECB (Electronic Code Book) sifreleme rutini */
