@@ -350,7 +350,8 @@ namespace DES_Module
             UInt64 rn_Old = 0x00000000;
             byte i = 0;
 
-            /* IP (Initial Permutation) matrisi ile mesaj verisinin ilk permutasyon islemi yapiliyor */
+            /* IP (Initial Permutation) matrisi ile mesaj (M) verisinin ilk permutasyon islemi yapililarak
+             * permute edilmis mesaj (M+) elde ediliyor */
             for (i = 0; i < 64; i++)
             {
                 bitShift_Buffer = 0x8000000000000000;
@@ -362,7 +363,20 @@ namespace DES_Module
                 encodedData = (encodedData | bitShift_Buffer);
             }
 
+            /* permute edilmis mesajin 32 bitlik sag ve sol parcalara ayrilmasi */
+            ln_Old = (0xFFFFFFFF00000000 & encodedData) >> 32;												
+            rn_Old = (0x00000000FFFFFFFF & encodedData);
 
+            /* permute edilmis ve parcalara ayrilmis mesaj verisinin 16 kez F fonksiyonu yardimi ile
+             * yer degistirerek sifreleme rutini iterasyonunun yapilmasi */
+            for (i = 0; i < 16; i++)
+            {
+                ln = rn_Old;
+                //rn = ln_Old ^ F_Function
+
+                rn_Old = rn;
+                ln_Old = ln;
+            }
 
             return encodedData;
         }
