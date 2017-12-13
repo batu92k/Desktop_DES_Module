@@ -393,15 +393,30 @@ namespace DES_Module
             UInt32 result = 0x00000000;
             UInt32 resultBuffer = 0x00000000;
             UInt32 bitShift_Buffer32 = 0x00000000;
-            UInt32 expandedInput = 0x0000000000000000;
-            UInt32 inputBuffer = 0x0000000000000000;
-            UInt32 bitShift_Buffer = 0x0000000000000000;
-            UInt32 B_Buffer = 0x0000000000000000;
+            UInt64 expandedInput = 0x0000000000000000;
+            UInt64 inputBuffer = 0x0000000000000000;
+            UInt64 bitShift_Buffer = 0x0000000000000000;
+            UInt64 B_Buffer = 0x0000000000000000;
             byte i = 0;
             byte S_Row = 0;
             byte S_Column = 0;
 
+            /* 32 bitlik giris verisinin E-bit secim tablosu yardimi ile 48 bite genisletilmesi */
+            for (i = 0; i < 48; i++)
+            {
+                bitShift_Buffer = 0x8000000000000000;
+                inputBuffer = input;
+                inputBuffer = (inputBuffer << 32);
+                bitShift_Buffer = (bitShift_Buffer >> (E_Bit_Selection_Table[i] - 1));
+                bitShift_Buffer = (bitShift_Buffer & inputBuffer);
+                bitShift_Buffer = (bitShift_Buffer << (E_Bit_Selection_Table[i] - 1));
+                bitShift_Buffer = (bitShift_Buffer >> i);
 
+                expandedInput = (expandedInput | bitShift_Buffer);
+            } 
+
+            /* genisletilen verinin iterasyon numarasina gore ilgili alt anahtar ile XOR'lanmasi */
+            expandedInput = (expandedInput ^ Sub_Keys[iterationNumber]);
 
 
             return result;
