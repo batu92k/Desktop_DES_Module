@@ -381,9 +381,21 @@ namespace DES_Module
             /* R16 ve L16 parcalari birlestirilerek permutasyon oncesi sifrelenmis data elde ediliyor */
             pre_PermutedData = rn_Old;
             pre_PermutedData = (pre_PermutedData << 32);
-            pre_PermutedData = (pre_PermutedData | ln_Old);	
+            pre_PermutedData = (pre_PermutedData | ln_Old);
 
+            /* IP^-1 matrisi ile sifrelenecek dataya son permutasyon islemi de uygulaniyor */
+            for (i = 0; i < 64; i++)
+            {
+                bitShift_Buffer = 0x8000000000000000;
+                bitShift_Buffer = (bitShift_Buffer >> (IP_[i] - 1));
+                bitShift_Buffer = bitShift_Buffer & (pre_PermutedData);
+                bitShift_Buffer = (bitShift_Buffer << (IP_[i] - 1));
+                bitShift_Buffer = (bitShift_Buffer >> i);
 
+                permutedData = (permutedData | bitShift_Buffer);
+            }
+
+            encodedData = permutedData;	
 
             return encodedData;
         }
