@@ -382,6 +382,32 @@ namespace DES_Module
         }
 
 
+      /**
+        * @brief  DES (Data Encryption Standart) F fonksiyonu rutini
+        * @param  input
+        * @param  iterationNumber
+        * @retval result
+        */
+        UInt32 F_Function(UInt32 input, byte iterationNumber)
+        {
+            UInt32 result = 0x00000000;
+            UInt32 resultBuffer = 0x00000000;
+            UInt32 bitShift_Buffer32 = 0x00000000;
+            UInt32 expandedInput = 0x0000000000000000;
+            UInt32 inputBuffer = 0x0000000000000000;
+            UInt32 bitShift_Buffer = 0x0000000000000000;
+            UInt32 B_Buffer = 0x0000000000000000;
+            byte i = 0;
+            byte S_Row = 0;
+            byte S_Column = 0;
+
+
+
+
+            return result;
+        }
+
+
     }
 
 }
