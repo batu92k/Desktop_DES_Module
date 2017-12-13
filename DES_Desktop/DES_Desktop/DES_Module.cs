@@ -238,6 +238,39 @@ namespace DES_Module
         }
 
         /**
+          * @brief  Bu fonksiyon; istenilen bir DES (Data Encryption Standart) modunda, kendisine verilen
+          *         veri dizisini sifreler ve sifrelenmis dizi olarak geri dondurur.  
+          * @param  plainData
+          * @retval none
+          */
+        public UInt64[] EncryptData(UInt64[] plainData, DES_Mode_Enum cipherMode)
+        {
+            UInt64[] cipherData = new UInt64[plainData.Length];
+            UInt64 chainBuffer = 0x0000000000000000;
+            UInt16 i = 0;
+
+            switch(cipherMode)
+            {
+
+                case DES_Mode_Enum.CBC:
+                        
+                    break;
+
+                case DES_Mode_Enum.ECB:
+
+                    break;
+
+                default:
+                        // bu satir bilerek bos birakildi
+                    break;
+
+
+            }
+
+            return cipherData;
+        }
+
+        /**
           * @brief  Bu fonksiyon; parametre olarak verilen DES anahtarini kullanarak DES sifreleme ve sifre cozme
           *         isleminde kullanilacak alt anahtarlari uretir ve Sub_Keys global dizisine yerlestirir 
           * @param  key
