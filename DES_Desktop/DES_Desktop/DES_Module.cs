@@ -341,6 +341,15 @@ namespace DES_Module
         UInt64 Encode_BlockData(UInt64 plainData)
         {
             UInt64 encodedData = 0x0000000000000000;
+            UInt64 bitShift_Buffer = 0x0000000000000000;
+            UInt64 permutedData = 0x0000000000000000;
+            UInt64 pre_PermutedData = 0x0000000000000000;
+            UInt64 ln = 0x00000000;
+            UInt64 ln_Old = 0x00000000;
+            UInt64 rn = 0x00000000;
+            UInt64 rn_Old = 0x00000000;
+            byte i = 0;
+
 
 
             return encodedData;
