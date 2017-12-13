@@ -299,7 +299,7 @@ namespace DES_Module
           * @param  none
           * @retval none
           */
-        public void Get_Subkeys()
+        private void Get_Subkeys()
         {
             UInt64 permutedKey = 0x0000000000000000;        // orjinal DES anahtarinin PC_1 permutasyonu K+
             UInt64 bitShift_Buffer = 0x0000000000000000;    // bit kaydirma degiskeni
@@ -376,7 +376,7 @@ namespace DES_Module
           * @param  shiftValue
           * @retval buffer
           */
-        UInt32 DES_Subkey_BitShifter(UInt32 value, byte shiftValue)
+        private UInt32 DES_Subkey_BitShifter(UInt32 value, byte shiftValue)
         {
             UInt32 buffer = 0x00000000;
 
@@ -390,7 +390,7 @@ namespace DES_Module
         * @param  plainData
         * @retval encodedData
         */
-        UInt64 Encode_BlockData(UInt64 plainData)
+        private UInt64 Encode_BlockData(UInt64 plainData)
         {
             UInt64 encodedData = 0x0000000000000000;            // geri dondurulecek sifre blok metin degiskeni
             UInt64 bitShift_Buffer = 0x0000000000000000;        // bit kaydirma islemi icin tutucu degisken
@@ -459,7 +459,7 @@ namespace DES_Module
         * @param  iterationNumber
         * @retval result
         */
-        UInt32 F_Function(UInt32 input, byte iterationNumber)
+        private UInt32 F_Function(UInt32 input, byte iterationNumber)
         {
             UInt32 result = 0x00000000;                         // geri dondurulecek fonksiyon cikis degeri
             UInt32 resultBuffer = 0x00000000;                   // cikis degeri ustunde yapilacak islemler icin tutucu degisken
