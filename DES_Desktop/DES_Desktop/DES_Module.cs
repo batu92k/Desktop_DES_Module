@@ -241,7 +241,8 @@ namespace DES_Module
           * @brief  Bu fonksiyon; istenilen bir DES (Data Encryption Standart) modunda, kendisine verilen
           *         veri dizisini sifreler ve sifrelenmis dizi olarak geri dondurur.  
           * @param  plainData
-          * @retval none
+          * @param  cipherMode
+          * @retval cipherData
           */
         public UInt64[] Encrypt_Data(UInt64[] plainData, DES_Mode_Enum cipherMode)
         {
@@ -291,6 +292,24 @@ namespace DES_Module
             }
 
             return cipherData;
+        }
+
+        /**
+          * @brief  Bu fonksiyon; istenilen bir DES (Data Encryption Standart) modunda, kendisine verilen
+          *         sifrelenmis veriyi cozerek geri dondurur. 
+          * @param  cipherData
+          * @param  cipherMode
+          * @retval plainData
+          */
+        private UInt64[] Decrypt_Data(UInt64[] cipherData, DES_Mode_Enum cipherMode)
+        {
+            UInt64[] plainData = new UInt64[cipherData.Length];
+            UInt64 chainBuffer = 0x0000000000000000;
+            UInt16 i = 0;
+
+
+
+            return plainData;
         }
 
         /**
