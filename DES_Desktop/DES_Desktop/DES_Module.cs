@@ -165,9 +165,6 @@ namespace DES_Module
          * CBC - Cipher Block Chaining */
         public enum DES_Mode_Enum { Default, ECB, CBC };
 
-        /* DES sifreleme modu degiskeni */
-        public DES_Mode_Enum cipherMode;
-
         // Initialization Vector
         private UInt64 IV;
 
@@ -185,7 +182,6 @@ namespace DES_Module
             Sub_Keys = new UInt64[16];
             Cn = new UInt32[17];
             Dn = new UInt32[17];
-            cipherMode = DES_Mode_Enum.Default;
             IV = 0x0000000000000000;
             KEY = 0x0000000000000000;
         }
