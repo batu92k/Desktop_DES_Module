@@ -364,7 +364,7 @@ namespace DES_Module
             }
 
             /* permute edilmis mesajin 32 bitlik sag ve sol parcalara ayrilmasi */
-            ln_Old = (UInt32)(0xFFFFFFFF00000000 & encodedData) >> 32;												
+            ln_Old = (UInt32)((0xFFFFFFFF00000000 & encodedData) >> 32);												
             rn_Old = (UInt32)(0x00000000FFFFFFFF & encodedData);
 
             /* permute edilmis ve parcalara ayrilmis mesaj verisinin 16 kez F fonksiyonu yardimi ile
