@@ -453,6 +453,29 @@ namespace DES_Module
         }
 
 
+        /**
+          * @brief  Bu fonksiyon 64 bitlik sifrelenmis bir blok datanin sifresini cozer
+          * @param  cipherData
+          * @retval decodedData
+          */
+        private UInt64 Decode_BlockData(UInt64 cipherData)
+        {
+            UInt64 decodedData = 0x0000000000000000;            // geri dondurulecek sifre blok metin degiskeni
+            UInt64 bitShift_Buffer = 0x0000000000000000;        // bit kaydirma islemi icin tutucu degisken
+            UInt64 permutedData = 0x0000000000000000;           // permutasyon islemine tabi tutulacak veri icin tutucu degisken
+            UInt64 pre_PermutedData = 0x0000000000000000;       // permutasyon oncesi islemler icin veri tutucu degiskeni
+            UInt32 ln = 0x00000000;                             // mesajin ilgili iterasyona air 32 bitlik sol parcasi
+            UInt32 ln_Old = 0x00000000;                         // mesajin ilgili iterasyondan bir onceki duruma ait 32 bitlik sol parcasi
+            UInt32 rn = 0x00000000;                             // mesajin ilgili iterasyona air 32 bitlik sag parcasi
+            UInt32 rn_Old = 0x00000000;                         // mesajin ilgili iterasyondan bir onceki duruma ait 32 bitlik sag parcasi
+            byte i = 0;                                         // genel maksat sayac
+
+
+
+            return decodedData;
+        }
+
+
       /**
         * @brief  DES (Data Encryption Standart) F fonksiyonu rutini
         * @param  input
