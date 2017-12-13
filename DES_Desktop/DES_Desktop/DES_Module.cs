@@ -466,7 +466,21 @@ namespace DES_Module
                 result = (result | resultBuffer);
             }
 
+            /* cikis verisinin permute edilmek uzere tutucu degiskene atilmasi */
+            resultBuffer = result;
+            result = 0x00000000;
 
+            /* P matrisi ile yapilan son permutasyon isleminin ardindan F fonksiyon ciktisinin elde edilmesi */
+            for (i = 0; i < 32; i++)
+            {
+                bitShift_Buffer32 = 0x80000000;
+                bitShift_Buffer32 = (bitShift_Buffer32 >> (P[i] - 1));
+                bitShift_Buffer32 = (bitShift_Buffer32 & resultBuffer);
+                bitShift_Buffer32 = (bitShift_Buffer32 << (P[i] - 1));
+                bitShift_Buffer32 = (bitShift_Buffer32 >> i);
+
+                result = (result | bitShift_Buffer32);
+            }
 
             return result;
         }
