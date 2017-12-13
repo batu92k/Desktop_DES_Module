@@ -397,6 +397,7 @@ namespace DES_Module
             UInt64 inputBuffer = 0x0000000000000000;
             UInt64 bitShift_Buffer = 0x0000000000000000;
             UInt64 B_Buffer = 0x0000000000000000;
+
             byte i = 0;
             byte S_Row = 0;
             byte S_Column = 0;
@@ -417,6 +418,54 @@ namespace DES_Module
 
             /* genisletilen verinin iterasyon numarasina gore ilgili alt anahtar ile XOR'lanmasi */
             expandedInput = (expandedInput ^ Sub_Keys[iterationNumber]);
+
+	        /* 48 bitlik genisletilmis veriden 8 adet 6 bitlik B degeri elde edilmesi ve bu B verileri ile
+             * S-Box'lar kullanilarak 8 adet 6 bitlik verinin 4 bite dusurulup 8x4 = 32 bitlik
+             * permutasyon oncesi F fonksiyon ciktisinin elde edilmesi */
+            for (i = 0; i < 8; i++)
+            {
+                B_Buffer = 0xFC;    // 0b11111100
+                B_Buffer = (B_Buffer << 56);
+                B_Buffer = (B_Buffer >> (i * 6));
+                B_Buffer = ((expandedInput & B_Buffer) >> (56 - (i * 6)));
+
+                /* S-Box sutun adresi 6 bitlik B verisinin ilk ve son bitine bakilarak
+                 * adresleniyor */
+                switch (B_Buffer & 0x84) // 0b10000100
+                {
+                    case 0x00: // 0b00000000
+                        S_Row = 0;
+                        break;
+
+                    case 0x04: // 0b00000100
+                        S_Row = 1;
+                        break;
+
+                    case 0x80: // 0b10000000
+                        S_Row = 2;
+                        break;
+
+                    case 0x84: // 0b10000100
+                        S_Row = 3;
+                        break;
+
+                    default:
+                        // bu hat bilerek bos birakildi
+                        break;
+                }
+
+                /* ilgili 6 bitlik B datasinin ortadaki 4 biti ile de S-Box dizisinin
+                 * kolon adresi elde ediliyor */
+                S_Column = (byte)((B_Buffer & 0x78) >> 3); // 0b01111000
+
+                /* ilgili dongu iterasyonuna ait S kutusunda adreslenen veri bulunarak 32 bitlik cikis
+                 * tutucu degiskeni uzerinde ilgili noktaya kaydiriliyor ve cikis verisine ekleniyor*/
+                resultBuffer = SBox[i,S_Row,S_Column];
+                resultBuffer = (resultBuffer << (28 - (4 * i)));
+
+                result = (result | resultBuffer);
+            }
+
 
 
             return result;
