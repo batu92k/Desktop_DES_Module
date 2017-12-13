@@ -392,15 +392,15 @@ namespace DES_Module
         */
         UInt64 Encode_BlockData(UInt64 plainData)
         {
-            UInt64 encodedData = 0x0000000000000000;
-            UInt64 bitShift_Buffer = 0x0000000000000000;
-            UInt64 permutedData = 0x0000000000000000;
-            UInt64 pre_PermutedData = 0x0000000000000000;
-            UInt32 ln = 0x00000000;
-            UInt32 ln_Old = 0x00000000;
-            UInt32 rn = 0x00000000;
-            UInt32 rn_Old = 0x00000000;
-            byte i = 0;
+            UInt64 encodedData = 0x0000000000000000;            // geri dondurulecek sifre blok metin degiskeni
+            UInt64 bitShift_Buffer = 0x0000000000000000;        // bit kaydirma islemi icin tutucu degisken
+            UInt64 permutedData = 0x0000000000000000;           // permutasyon islemine tabi tutulacak veri icin tutucu degisken
+            UInt64 pre_PermutedData = 0x0000000000000000;       // permutasyon oncesi islemler icin veri tutucu degiskeni
+            UInt32 ln = 0x00000000;                             // mesajin ilgili iterasyona air 32 bitlik sol parcasi
+            UInt32 ln_Old = 0x00000000;                         // mesajin ilgili iterasyondan bir onceki duruma ait 32 bitlik sol parcasi
+            UInt32 rn = 0x00000000;                             // mesajin ilgili iterasyona air 32 bitlik sag parcasi
+            UInt32 rn_Old = 0x00000000;                         // mesajin ilgili iterasyondan bir onceki duruma ait 32 bitlik sag parcasi
+            byte i = 0;                                         // genel maksat sayac
 
             /* IP (Initial Permutation) matrisi ile mesaj (M) verisinin ilk permutasyon islemi yapililarak
              * permute edilmis mesaj (M+) elde ediliyor */
@@ -461,13 +461,13 @@ namespace DES_Module
         */
         UInt32 F_Function(UInt32 input, byte iterationNumber)
         {
-            UInt32 result = 0x00000000;
-            UInt32 resultBuffer = 0x00000000;
-            UInt32 bitShift_Buffer32 = 0x00000000;
-            UInt64 expandedInput = 0x0000000000000000;
-            UInt64 inputBuffer = 0x0000000000000000;
-            UInt64 bitShift_Buffer = 0x0000000000000000;
-            UInt64 B_Buffer = 0x0000000000000000;
+            UInt32 result = 0x00000000;                         // geri dondurulecek fonksiyon cikis degeri
+            UInt32 resultBuffer = 0x00000000;                   // cikis degeri ustunde yapilacak islemler icin tutucu degisken
+            UInt32 bitShift_Buffer32 = 0x00000000;              // 32 bitlik datalar icin bit kaydirma tutucu degiskeni
+            UInt64 expandedInput = 0x0000000000000000;          // 48 bite genisletilmis veri icin tutucu degisken
+            UInt64 inputBuffer = 0x0000000000000000;            // giris verisi uzerindeki islemler icin tutucu degisken
+            UInt64 bitShift_Buffer = 0x0000000000000000;        // bit kaydirma icin tutucu degisken
+            UInt64 B_Buffer = 0x0000000000000000;               // 6 bitlik B verisi icin tutucu degisken
 
             byte i = 0;
             byte S_Row = 0;
