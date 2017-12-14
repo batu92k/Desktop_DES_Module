@@ -24,12 +24,24 @@ namespace DES_Desktop
 {
     public partial class Main_Form : Form
     {
+
+        /**
+          * @brief  Form uygulamasi baslangic noktasi
+          * @param  none
+          * @retval none
+          */
         public Main_Form()
         {
             InitializeComponent();
             desMode_Cmb.SelectedIndex = 0;
         }
 
+        /**
+          * @brief  Encode butonu tiklama olayinda isletilecek rutini tanimlayan fonksiyon
+          * @param  sender
+          * @param  e 
+          * @retval none
+          */
         private void encode_Btn_Click(object sender, EventArgs e)
         {
             /* click event fonksiyonunda kullanilacak degiskenler tanimlanip ilklendiriliyor */
@@ -88,6 +100,12 @@ namespace DES_Desktop
 
         }
 
+        /**
+          * @brief  Decode butonu tiklama olayinda isletilecek rutini tanimlayan fonksiyon
+          * @param  sender
+          * @param  e 
+          * @retval none
+          */
         private void decode_Btn_Click(object sender, EventArgs e)
         {
 
