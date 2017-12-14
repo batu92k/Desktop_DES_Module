@@ -20,9 +20,9 @@ using System.Windows.Forms;
 
 namespace DES_Desktop
 {
-    public partial class Form1 : Form
+    public partial class Main_Form : Form
     {
-        public Form1()
+        public Main_Form()
         {
             InitializeComponent();
         }
