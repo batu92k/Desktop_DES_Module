@@ -312,6 +312,19 @@ namespace DES_Module
                     /* DES - CBC (Cipher Block Chaining) sifre cozme rutini */
                 case DES_Mode_Enum.CBC:
 
+                    Get_Subkeys();
+
+                    /* sifreli verinin ilk elemaninin sifresi cozulup IV (Initialization Vector) ile XOR'laniyor */
+                    chainBuffer = Decode_BlockData(cipherData[0]);
+                    plainData[0] = (chainBuffer ^ IV);
+
+                    /* her bir datanin sirayla sifresi cozulup bir onceki veri ile XOR islemine tabi tutuluyor */
+                    for (i = 1; i < cipherData.Length; i++)
+                    {
+                        chainBuffer = Decode_BlockData(cipherData[i]);
+
+                        plainData[i] = (chainBuffer ^ cipherData[i - 1]);
+                    }
 
                     break;
 
