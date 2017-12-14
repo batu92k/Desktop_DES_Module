@@ -26,5 +26,15 @@ namespace DES_Desktop
         {
             InitializeComponent();
         }
+
+        private void encode_Btn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void decode_Btn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
