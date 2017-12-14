@@ -307,7 +307,32 @@ namespace DES_Module
             UInt64 chainBuffer = 0x0000000000000000;
             UInt16 i = 0;
 
+            switch(cipherMode)
+            {
+                    /* DES - CBC (Cipher Block Chaining) sifre cozme rutini */
+                case DES_Mode_Enum.CBC:
 
+
+                    break;
+
+                    /* DES - ECB (Electronic Code Book) sifre cozme rutini */
+                case DES_Mode_Enum.ECB:
+
+                    Get_Subkeys();
+
+                    /* sifrelenmis veri tek tek cozulerek acik veri dizisine aktariliyor */
+                    for (i = 0; i < cipherData.Length; i++)
+                    {
+                        plainData[i] = Decode_BlockData(cipherData[i]);
+                    }
+
+                    break;
+
+                default:
+
+                    break;
+
+            }
 
             return plainData;
         }
