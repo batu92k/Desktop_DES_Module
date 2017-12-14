@@ -52,9 +52,11 @@
             this.key_Lb = new System.Windows.Forms.Label();
             this.iv_Lb = new System.Windows.Forms.Label();
             this.desMode_Cmb = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.split1_Lb = new System.Windows.Forms.Label();
             this.mode_Lb = new System.Windows.Forms.Label();
             this.lock_PctBx = new System.Windows.Forms.PictureBox();
+            this.split2_Lb = new System.Windows.Forms.Label();
+            this.sign_Lb = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.lock_PctBx)).BeginInit();
             this.SuspendLayout();
             // 
@@ -285,14 +287,14 @@
             this.desMode_Cmb.Size = new System.Drawing.Size(165, 24);
             this.desMode_Cmb.TabIndex = 22;
             // 
-            // label1
+            // split1_Lb
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(-9, 357);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(392, 17);
-            this.label1.TabIndex = 23;
-            this.label1.Text = "________________________________________________";
+            this.split1_Lb.AutoSize = true;
+            this.split1_Lb.Location = new System.Drawing.Point(-9, 357);
+            this.split1_Lb.Name = "split1_Lb";
+            this.split1_Lb.Size = new System.Drawing.Size(392, 17);
+            this.split1_Lb.TabIndex = 23;
+            this.split1_Lb.Text = "________________________________________________";
             // 
             // mode_Lb
             // 
@@ -316,15 +318,35 @@
             this.lock_PctBx.TabIndex = 25;
             this.lock_PctBx.TabStop = false;
             // 
+            // split2_Lb
+            // 
+            this.split2_Lb.AutoSize = true;
+            this.split2_Lb.Location = new System.Drawing.Point(-9, 483);
+            this.split2_Lb.Name = "split2_Lb";
+            this.split2_Lb.Size = new System.Drawing.Size(392, 17);
+            this.split2_Lb.TabIndex = 26;
+            this.split2_Lb.Text = "________________________________________________";
+            // 
+            // sign_Lb
+            // 
+            this.sign_Lb.AutoSize = true;
+            this.sign_Lb.Location = new System.Drawing.Point(55, 509);
+            this.sign_Lb.Name = "sign_Lb";
+            this.sign_Lb.Size = new System.Drawing.Size(260, 17);
+            this.sign_Lb.TabIndex = 27;
+            this.sign_Lb.Text = "@author Batuhan KINDAN - 14.12.2017";
+            // 
             // Main_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(382, 485);
+            this.ClientSize = new System.Drawing.Size(382, 535);
+            this.Controls.Add(this.sign_Lb);
+            this.Controls.Add(this.split2_Lb);
             this.Controls.Add(this.lock_PctBx);
             this.Controls.Add(this.mode_Lb);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.split1_Lb);
             this.Controls.Add(this.desMode_Cmb);
             this.Controls.Add(this.iv_Lb);
             this.Controls.Add(this.key_Lb);
@@ -383,9 +405,11 @@
         private System.Windows.Forms.Label key_Lb;
         private System.Windows.Forms.Label iv_Lb;
         private System.Windows.Forms.ComboBox desMode_Cmb;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label split1_Lb;
         private System.Windows.Forms.Label mode_Lb;
         private System.Windows.Forms.PictureBox lock_PctBx;
+        private System.Windows.Forms.Label split2_Lb;
+        private System.Windows.Forms.Label sign_Lb;
     }
 }
 
