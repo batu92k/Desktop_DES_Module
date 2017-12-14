@@ -216,7 +216,7 @@
             this.cipherData3_Txb.Name = "cipherData3_Txb";
             this.cipherData3_Txb.Size = new System.Drawing.Size(165, 22);
             this.cipherData3_Txb.TabIndex = 11;
-            this.cipherData3_Txb.Text = "0x0000000000000000";
+            this.cipherData3_Txb.Text = "0x85E813540F0AB405";
             // 
             // cipherData2_Txb
             // 
@@ -225,7 +225,7 @@
             this.cipherData2_Txb.Name = "cipherData2_Txb";
             this.cipherData2_Txb.Size = new System.Drawing.Size(165, 22);
             this.cipherData2_Txb.TabIndex = 10;
-            this.cipherData2_Txb.Text = "0x0000000000000000";
+            this.cipherData2_Txb.Text = "0x85E813540F0AB405";
             // 
             // cipherData1_Txb
             // 
@@ -234,7 +234,7 @@
             this.cipherData1_Txb.Name = "cipherData1_Txb";
             this.cipherData1_Txb.Size = new System.Drawing.Size(165, 22);
             this.cipherData1_Txb.TabIndex = 9;
-            this.cipherData1_Txb.Text = "0x0000000000000000";
+            this.cipherData1_Txb.Text = "0x85E813540F0AB405";
             // 
             // key_Txb
             // 
