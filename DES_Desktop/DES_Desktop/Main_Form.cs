@@ -108,6 +108,59 @@ namespace DES_Desktop
           */
         private void decode_Btn_Click(object sender, EventArgs e)
         {
+            /* click event fonksiyonunda kullanilacak degiskenler tanimlanip ilklendiriliyor */
+            DES desTool = new DES();
+            UInt64 bufferValue = 0;
+            DES.DES_Mode_Enum cipherMode = DES.DES_Mode_Enum.Default;
+            ulong[] cipherData = new ulong[3];
+            ulong[] plainData = new ulong[3];
+            string textBoxBuffer = "";
+
+            /* cipher data 1, 2 ve 3 uint64 tipine cevrilip diziye yerlestiriliyor */
+            textBoxBuffer = cipherData1_Txb.Text;
+            textBoxBuffer = textBoxBuffer.Replace("0x", "");
+            ulong.TryParse(textBoxBuffer, NumberStyles.HexNumber, null, out cipherData[0]);
+
+            textBoxBuffer = cipherData2_Txb.Text;
+            textBoxBuffer = textBoxBuffer.Replace("0x", "");
+            ulong.TryParse(textBoxBuffer, NumberStyles.HexNumber, null, out cipherData[1]);
+
+            textBoxBuffer = cipherData3_Txb.Text;
+            textBoxBuffer = textBoxBuffer.Replace("0x", "");
+            ulong.TryParse(textBoxBuffer, NumberStyles.HexNumber, null, out cipherData[2]);
+
+            /* DES anahtari ve baslangic vektoru (CBC modu icin) uint64'e cevrilip DES sinifina yukleniyor */
+            textBoxBuffer = key_Txb.Text;
+            textBoxBuffer = textBoxBuffer.Replace("0x", "");
+            ulong.TryParse(textBoxBuffer, NumberStyles.HexNumber, null, out bufferValue);
+            desTool.Set_Key(bufferValue);
+
+            textBoxBuffer = iv_Txb.Text;
+            textBoxBuffer = textBoxBuffer.Replace("0x", "");
+            ulong.TryParse(textBoxBuffer, NumberStyles.HexNumber, null, out bufferValue);
+            desTool.Set_IV(bufferValue);
+
+            /* form penceresi uzerindeki combo box uzerinden DES sifreleme modu belirleniyor */
+            if (desMode_Cmb.SelectedItem == "ECB")
+            {
+                cipherMode = DES.DES_Mode_Enum.ECB;
+            }
+            else if (desMode_Cmb.SelectedItem == "CBC")
+            {
+                cipherMode = DES.DES_Mode_Enum.CBC;
+            }
+            else
+            {
+                // bu satir bilerek bos birakildi
+            }
+
+            /* cipherData sifresi cozulup plainData dizisine yerlestiriliyor */
+            plainData = desTool.Decrypt_Data(cipherData, cipherMode);
+
+            /* sifresi cozulmus data form penceresindeki labellar ile gosteriliyor */
+            plainData1_Lb.Text = "0x" + plainData[0].ToString("X16");
+            plainData2_Lb.Text = "0x" + plainData[1].ToString("X16");
+            plainData3_Lb.Text = "0x" + plainData[2].ToString("X16");
 
         }
     }
