@@ -241,7 +241,8 @@ namespace DES_Module
           * @brief  Bu fonksiyon; istenilen bir DES (Data Encryption Standart) modunda, kendisine verilen
           *         veri dizisini sifreler ve sifrelenmis dizi olarak geri dondurur.  
           * @param  plainData
-          * @retval none
+          * @param  cipherMode
+          * @retval cipherData
           */
         public UInt64[] Encrypt_Data(UInt64[] plainData, DES_Mode_Enum cipherMode)
         {
@@ -294,12 +295,68 @@ namespace DES_Module
         }
 
         /**
+          * @brief  Bu fonksiyon; istenilen bir DES (Data Encryption Standart) modunda, kendisine verilen
+          *         sifrelenmis veriyi cozerek geri dondurur. 
+          * @param  cipherData
+          * @param  cipherMode
+          * @retval plainData
+          */
+        public UInt64[] Decrypt_Data(UInt64[] cipherData, DES_Mode_Enum cipherMode)
+        {
+            UInt64[] plainData = new UInt64[cipherData.Length];
+            UInt64 chainBuffer = 0x0000000000000000;
+            UInt16 i = 0;
+
+            switch(cipherMode)
+            {
+                    /* DES - CBC (Cipher Block Chaining) sifre cozme rutini */
+                case DES_Mode_Enum.CBC:
+
+                    Get_Subkeys();
+
+                    /* sifreli verinin ilk elemaninin sifresi cozulup IV (Initialization Vector) ile XOR'laniyor */
+                    chainBuffer = Decode_BlockData(cipherData[0]);
+                    plainData[0] = (chainBuffer ^ IV);
+
+                    /* her bir datanin sirayla sifresi cozulup bir onceki veri ile XOR islemine tabi tutuluyor */
+                    for (i = 1; i < cipherData.Length; i++)
+                    {
+                        chainBuffer = Decode_BlockData(cipherData[i]);
+
+                        plainData[i] = (chainBuffer ^ cipherData[i - 1]);
+                    }
+
+                    break;
+
+                    /* DES - ECB (Electronic Code Book) sifre cozme rutini */
+                case DES_Mode_Enum.ECB:
+
+                    Get_Subkeys();
+
+                    /* sifrelenmis veri tek tek cozulerek acik veri dizisine aktariliyor */
+                    for (i = 0; i < cipherData.Length; i++)
+                    {
+                        plainData[i] = Decode_BlockData(cipherData[i]);
+                    }
+
+                    break;
+
+                default:
+
+                    break;
+
+            }
+
+            return plainData;
+        }
+
+        /**
           * @brief  Bu fonksiyon; parametre olarak verilen DES anahtarini kullanarak DES sifreleme ve sifre cozme
           *         isleminde kullanilacak alt anahtarlari uretir ve Sub_Keys global dizisine yerlestirir 
           * @param  none
           * @retval none
           */
-        public void Get_Subkeys()
+        private void Get_Subkeys()
         {
             UInt64 permutedKey = 0x0000000000000000;        // orjinal DES anahtarinin PC_1 permutasyonu K+
             UInt64 bitShift_Buffer = 0x0000000000000000;    // bit kaydirma degiskeni
@@ -376,7 +433,7 @@ namespace DES_Module
           * @param  shiftValue
           * @retval buffer
           */
-        UInt32 DES_Subkey_BitShifter(UInt32 value, byte shiftValue)
+        private UInt32 DES_Subkey_BitShifter(UInt32 value, byte shiftValue)
         {
             UInt32 buffer = 0x00000000;
 
@@ -390,17 +447,17 @@ namespace DES_Module
         * @param  plainData
         * @retval encodedData
         */
-        UInt64 Encode_BlockData(UInt64 plainData)
+        private UInt64 Encode_BlockData(UInt64 plainData)
         {
-            UInt64 encodedData = 0x0000000000000000;
-            UInt64 bitShift_Buffer = 0x0000000000000000;
-            UInt64 permutedData = 0x0000000000000000;
-            UInt64 pre_PermutedData = 0x0000000000000000;
-            UInt32 ln = 0x00000000;
-            UInt32 ln_Old = 0x00000000;
-            UInt32 rn = 0x00000000;
-            UInt32 rn_Old = 0x00000000;
-            byte i = 0;
+            UInt64 encodedData = 0x0000000000000000;            // geri dondurulecek sifre blok metin degiskeni
+            UInt64 bitShift_Buffer = 0x0000000000000000;        // bit kaydirma islemi icin tutucu degisken
+            UInt64 permutedData = 0x0000000000000000;           // permutasyon islemine tabi tutulacak veri icin tutucu degisken
+            UInt64 pre_PermutedData = 0x0000000000000000;       // permutasyon oncesi islemler icin veri tutucu degiskeni
+            UInt32 ln = 0x00000000;                             // mesajin ilgili iterasyona air 32 bitlik sol parcasi
+            UInt32 ln_Old = 0x00000000;                         // mesajin ilgili iterasyondan bir onceki duruma ait 32 bitlik sol parcasi
+            UInt32 rn = 0x00000000;                             // mesajin ilgili iterasyona air 32 bitlik sag parcasi
+            UInt32 rn_Old = 0x00000000;                         // mesajin ilgili iterasyondan bir onceki duruma ait 32 bitlik sag parcasi
+            byte i = 0;                                         // genel maksat sayac
 
             /* IP (Initial Permutation) matrisi ile mesaj (M) verisinin ilk permutasyon islemi yapililarak
              * permute edilmis mesaj (M+) elde ediliyor */
@@ -453,21 +510,91 @@ namespace DES_Module
         }
 
 
+        /**
+          * @brief  Bu fonksiyon 64 bitlik sifrelenmis bir blok datanin sifresini cozer
+          * @param  cipherData
+          * @retval decodedData
+          */
+        private UInt64 Decode_BlockData(UInt64 cipherData)
+        {
+            UInt64 decodedData = 0x0000000000000000;            // geri dondurulecek sifre blok metin degiskeni
+            UInt64 bitShift_Buffer = 0x0000000000000000;        // bit kaydirma islemi icin tutucu degisken
+            UInt64 permutedData = 0x0000000000000000;           // permutasyon islemine tabi tutulacak veri icin tutucu degisken
+            UInt64 pre_PermutedData = 0x0000000000000000;       // permutasyon oncesi islemler icin veri tutucu degiskeni
+            UInt32 ln = 0x00000000;                             // mesajin ilgili iterasyona air 32 bitlik sol parcasi
+            UInt32 ln_Old = 0x00000000;                         // mesajin ilgili iterasyondan bir onceki duruma ait 32 bitlik sol parcasi
+            UInt32 rn = 0x00000000;                             // mesajin ilgili iterasyona air 32 bitlik sag parcasi
+            UInt32 rn_Old = 0x00000000;                         // mesajin ilgili iterasyondan bir onceki duruma ait 32 bitlik sag parcasi
+            byte i = 0;                                         // genel maksat sayac
+
+
+            /* IP (Initial Permutation) matrisi ile mesaj (M) verisinin ilk permutasyon islemi yapililarak
+             * permute edilmis mesaj (M+) elde ediliyor */
+            for (i = 0; i < 64; i++)
+            {
+                bitShift_Buffer = 0x8000000000000000;
+                bitShift_Buffer = (bitShift_Buffer >> (IP[i] - 1));
+                bitShift_Buffer = bitShift_Buffer & (cipherData);
+                bitShift_Buffer = (bitShift_Buffer << (IP[i] - 1));
+                bitShift_Buffer = (bitShift_Buffer >> i);
+
+                decodedData = (decodedData | bitShift_Buffer);
+            }
+
+
+            /* permute edilmis mesajin 32 bitlik sag ve sol parcalara ayrilmasi */
+            ln_Old = (UInt32)((0xFFFFFFFF00000000 & decodedData) >> 32);
+            rn_Old = (UInt32)(0x00000000FFFFFFFF & decodedData);
+
+            /* permute edilmis ve parcalara ayrilmis mesaj verisinin 16 kez F fonksiyonu yardimi ile
+             * yer degistirerek sifreleme rutininin aynisi olan sifre cozme iterasyonunun yapilmasi */
+            for (i = 0; i < 16; i++)
+            {
+                ln = rn_Old;
+                rn = ln_Old ^ F_Function(rn_Old, (byte)(15 - i));
+
+                rn_Old = rn;
+                ln_Old = ln;
+            }
+
+            /* R16 ve L16 parcalari birlestirilerek permutasyon oncesi data elde ediliyor */
+            pre_PermutedData = rn_Old;
+            pre_PermutedData = (pre_PermutedData << 32);
+            pre_PermutedData = (pre_PermutedData | ln_Old);
+
+            /* IP^-1 matrisi ile sifresi cozulecek dataya son permutasyon islemi de uygulaniyor */
+            for (i = 0; i < 64; i++)
+            {
+                bitShift_Buffer = 0x8000000000000000;
+                bitShift_Buffer = (bitShift_Buffer >> (IP_[i] - 1));
+                bitShift_Buffer = bitShift_Buffer & (pre_PermutedData);
+                bitShift_Buffer = (bitShift_Buffer << (IP_[i] - 1));
+                bitShift_Buffer = (bitShift_Buffer >> i);
+
+                permutedData = (permutedData | bitShift_Buffer);
+            }
+
+            decodedData = permutedData;
+
+            return decodedData;
+        }
+
+
       /**
         * @brief  DES (Data Encryption Standart) F fonksiyonu rutini
         * @param  input
         * @param  iterationNumber
         * @retval result
         */
-        UInt32 F_Function(UInt32 input, byte iterationNumber)
+        private UInt32 F_Function(UInt32 input, byte iterationNumber)
         {
-            UInt32 result = 0x00000000;
-            UInt32 resultBuffer = 0x00000000;
-            UInt32 bitShift_Buffer32 = 0x00000000;
-            UInt64 expandedInput = 0x0000000000000000;
-            UInt64 inputBuffer = 0x0000000000000000;
-            UInt64 bitShift_Buffer = 0x0000000000000000;
-            UInt64 B_Buffer = 0x0000000000000000;
+            UInt32 result = 0x00000000;                         // geri dondurulecek fonksiyon cikis degeri
+            UInt32 resultBuffer = 0x00000000;                   // cikis degeri ustunde yapilacak islemler icin tutucu degisken
+            UInt32 bitShift_Buffer32 = 0x00000000;              // 32 bitlik datalar icin bit kaydirma tutucu degiskeni
+            UInt64 expandedInput = 0x0000000000000000;          // 48 bite genisletilmis veri icin tutucu degisken
+            UInt64 inputBuffer = 0x0000000000000000;            // giris verisi uzerindeki islemler icin tutucu degisken
+            UInt64 bitShift_Buffer = 0x0000000000000000;        // bit kaydirma icin tutucu degisken
+            UInt64 B_Buffer = 0x0000000000000000;               // 6 bitlik B verisi icin tutucu degisken
 
             byte i = 0;
             byte S_Row = 0;
