@@ -1,8 +1,8 @@
 ﻿/**
   ******************************************************************************
   * @file    DES_Module.cs
-  * @author  Ali Batuhan KINDAN
-  * @version V0.1
+  * @author  Batuhan KINDAN
+  * @version V1.0
   * @date    12 Aralik 2017
   * @brief   Data Encryption Standart (DES) sinifinin global gedigkenleri, constructor,
   *          destructor ve kriptolama islem fonksiyonlari bu dosyada bulunur. 

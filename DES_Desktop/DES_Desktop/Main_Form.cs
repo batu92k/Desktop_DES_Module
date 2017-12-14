@@ -1,8 +1,8 @@
 ﻿/**
   ******************************************************************************
-  * @file    Form1.cs
-  * @author  Ali Batuhan KINDAN
-  * @version V0.1
+  * @file    Main_Form.cs
+  * @author  Batuhan KINDAN
+  * @version V1.0
   * @date    12 Aralik 2017
   * @brief   Program ana form dosyasi
   ******************************************************************************
