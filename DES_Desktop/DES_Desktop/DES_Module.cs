@@ -1,8 +1,8 @@
 ﻿/**
   ******************************************************************************
   * @file    DES_Module.cs
-  * @author  Ali Batuhan KINDAN
-  * @version V0.1
+  * @author  Batuhan KINDAN
+  * @version V1.0
   * @date    12 Aralik 2017
   * @brief   Data Encryption Standart (DES) sinifinin global gedigkenleri, constructor,
   *          destructor ve kriptolama islem fonksiyonlari bu dosyada bulunur. 
@@ -301,7 +301,7 @@ namespace DES_Module
           * @param  cipherMode
           * @retval plainData
           */
-        private UInt64[] Decrypt_Data(UInt64[] cipherData, DES_Mode_Enum cipherMode)
+        public UInt64[] Decrypt_Data(UInt64[] cipherData, DES_Mode_Enum cipherMode)
         {
             UInt64[] plainData = new UInt64[cipherData.Length];
             UInt64 chainBuffer = 0x0000000000000000;
