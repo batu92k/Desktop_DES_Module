@@ -91,21 +91,21 @@
             // 
             this.plainDataHeader1_Lb.AutoSize = true;
             this.plainDataHeader1_Lb.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.plainDataHeader1_Lb.Location = new System.Drawing.Point(45, 9);
+            this.plainDataHeader1_Lb.Location = new System.Drawing.Point(12, 9);
             this.plainDataHeader1_Lb.Name = "plainDataHeader1_Lb";
-            this.plainDataHeader1_Lb.Size = new System.Drawing.Size(97, 20);
+            this.plainDataHeader1_Lb.Size = new System.Drawing.Size(144, 20);
             this.plainDataHeader1_Lb.TabIndex = 3;
-            this.plainDataHeader1_Lb.Text = "Plain Data";
+            this.plainDataHeader1_Lb.Text = "Plain Data [hex]";
             // 
             // cipherDataHeader1_Lb
             // 
             this.cipherDataHeader1_Lb.AutoSize = true;
             this.cipherDataHeader1_Lb.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.cipherDataHeader1_Lb.Location = new System.Drawing.Point(233, 9);
+            this.cipherDataHeader1_Lb.Location = new System.Drawing.Point(204, 9);
             this.cipherDataHeader1_Lb.Name = "cipherDataHeader1_Lb";
-            this.cipherDataHeader1_Lb.Size = new System.Drawing.Size(110, 20);
+            this.cipherDataHeader1_Lb.Size = new System.Drawing.Size(157, 20);
             this.cipherDataHeader1_Lb.TabIndex = 4;
-            this.cipherDataHeader1_Lb.Text = "Cipher Data";
+            this.cipherDataHeader1_Lb.Text = "Cipher Data [hex]";
             // 
             // cipherData1_Lb
             // 
@@ -193,21 +193,21 @@
             // 
             this.plainDataHeader2_Lb.AutoSize = true;
             this.plainDataHeader2_Lb.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.plainDataHeader2_Lb.Location = new System.Drawing.Point(233, 189);
+            this.plainDataHeader2_Lb.Location = new System.Drawing.Point(204, 189);
             this.plainDataHeader2_Lb.Name = "plainDataHeader2_Lb";
-            this.plainDataHeader2_Lb.Size = new System.Drawing.Size(97, 20);
+            this.plainDataHeader2_Lb.Size = new System.Drawing.Size(144, 20);
             this.plainDataHeader2_Lb.TabIndex = 13;
-            this.plainDataHeader2_Lb.Text = "Plain Data";
+            this.plainDataHeader2_Lb.Text = "Plain Data [hex]";
             // 
             // cipherDataHeader2_Lb
             // 
             this.cipherDataHeader2_Lb.AutoSize = true;
             this.cipherDataHeader2_Lb.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.cipherDataHeader2_Lb.Location = new System.Drawing.Point(45, 189);
+            this.cipherDataHeader2_Lb.Location = new System.Drawing.Point(20, 189);
             this.cipherDataHeader2_Lb.Name = "cipherDataHeader2_Lb";
-            this.cipherDataHeader2_Lb.Size = new System.Drawing.Size(110, 20);
+            this.cipherDataHeader2_Lb.Size = new System.Drawing.Size(157, 20);
             this.cipherDataHeader2_Lb.TabIndex = 12;
-            this.cipherDataHeader2_Lb.Text = "Cipher Data";
+            this.cipherDataHeader2_Lb.Text = "Cipher Data [hex]";
             // 
             // cipherData3_Txb
             // 
