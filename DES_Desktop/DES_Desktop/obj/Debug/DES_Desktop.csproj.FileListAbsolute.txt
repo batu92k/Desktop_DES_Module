@@ -1,0 +1,9 @@
+C:\Users\arge\Documents\GitHub\Desktop_DES_Module\DES_Desktop\DES_Desktop\bin\Debug\DES_Desktop.exe.config
+C:\Users\arge\Documents\GitHub\Desktop_DES_Module\DES_Desktop\DES_Desktop\bin\Debug\DES_Desktop.exe
+C:\Users\arge\Documents\GitHub\Desktop_DES_Module\DES_Desktop\DES_Desktop\bin\Debug\DES_Desktop.pdb
+C:\Users\arge\Documents\GitHub\Desktop_DES_Module\DES_Desktop\DES_Desktop\obj\Debug\DES_Desktop.csprojResolveAssemblyReference.cache
+C:\Users\arge\Documents\GitHub\Desktop_DES_Module\DES_Desktop\DES_Desktop\obj\Debug\DES_Desktop.Properties.Resources.resources
+C:\Users\arge\Documents\GitHub\Desktop_DES_Module\DES_Desktop\DES_Desktop\obj\Debug\DES_Desktop.csproj.GenerateResource.Cache
+C:\Users\arge\Documents\GitHub\Desktop_DES_Module\DES_Desktop\DES_Desktop\obj\Debug\DES_Desktop.exe
+C:\Users\arge\Documents\GitHub\Desktop_DES_Module\DES_Desktop\DES_Desktop\obj\Debug\DES_Desktop.pdb
+C:\Users\arge\Documents\GitHub\Desktop_DES_Module\DES_Desktop\DES_Desktop\obj\Debug\DES_Desktop.Main_Form.resources
